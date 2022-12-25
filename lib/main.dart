@@ -36,7 +36,7 @@ class NewsApp extends StatelessWidget {
                 debugShowCheckedModeBanner: false,
                 theme: LightAppTheme(),
                 darkTheme: DarkAppTheme(),
-                themeMode: context.select((ThemeCubit themeCubit) => themeCubit.state.themeMode),
+                themeMode: context.watch<ThemeCubit>().state.themeMode,
                 home: HomeScreen(),
               );
         }

@@ -33,7 +33,7 @@ class _HomeScreenState extends State<HomeScreen> {
             title: Container(
               margin: EdgeInsets.only(left: 10.0),
               padding: const EdgeInsets.only(left: 0.0),
-              child: Text('News App'),
+              child: Text('Daily News'),
             ),
             actions: [
               IconButton(

@@ -5,8 +5,8 @@ ThemeData LightAppTheme() => ThemeData(
       primaryColor: Colors.black,
       colorScheme: ColorScheme.fromSwatch().copyWith(primary: Colors.black),
       floatingActionButtonTheme:
-          FloatingActionButtonThemeData(backgroundColor: Colors.black),
-      appBarTheme: AppBarTheme(
+          const FloatingActionButtonThemeData(backgroundColor: Colors.black),
+      appBarTheme: const AppBarTheme(
  
         iconTheme: IconThemeData(
           color: Colors.black,
@@ -27,13 +27,14 @@ ThemeData LightAppTheme() => ThemeData(
           fontSize: 23,
         ),
       ),
-      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         backgroundColor: Colors.white,
         type: BottomNavigationBarType.fixed,
         selectedItemColor: Colors.black,
         selectedIconTheme: IconThemeData(size: 15),
       ),
-      textTheme: TextTheme(
+      textTheme: const TextTheme(
+        
         bodyText1: TextStyle(
           color: Colors.black,
           fontSize: 18,
@@ -46,7 +47,7 @@ ThemeData DarkAppTheme() => ThemeData(
       dividerColor: Colors.white,
       colorScheme: ColorScheme.fromSwatch().copyWith(primary: Colors.white),
       scaffoldBackgroundColor: Colors.black,
-      appBarTheme: AppBarTheme(
+      appBarTheme: const AppBarTheme(
           iconTheme: IconThemeData(
           color: Colors.white, //change your color here
         ),
@@ -66,13 +67,13 @@ ThemeData DarkAppTheme() => ThemeData(
           fontSize: 23,
         ),
       ),
-      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
           backgroundColor: Colors.black,
           type: BottomNavigationBarType.fixed,
           selectedItemColor: Colors.white,
           selectedIconTheme: IconThemeData(size: 15),
           unselectedItemColor: Colors.blueGrey),
-      textTheme: TextTheme(
+      textTheme: const TextTheme(
         bodyText1: TextStyle(
           color: Colors.white,
           fontSize: 18,

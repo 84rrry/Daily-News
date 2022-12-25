@@ -1,73 +1,78 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:newsapp/Cubit/Theme/theme_cubit.dart';
 import 'package:newsapp/Screens/WebViewScreen.dart';
 
-Widget buildArticleItem(context,article)=>Padding(
-      padding: const EdgeInsets.all(20.0),
-      child: InkWell(
-        onTap: () {
-          NavigateTo(context, WebViewScreen("${article["url"]}"));
-        },
-        child: Row(
-          children: [
-            Container(
-              width: MediaQuery.of(context).size.width * 0.30,
-              height: MediaQuery.of(context).size.height * 0.15,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.0),
-                  image: DecorationImage(
-                    image: NetworkImage(
-                        '${article["urlToImage"]}'),
-                    fit: BoxFit.cover,
-                  )),
-            ),
-            SizedBox(
-              width: 20,
-            ),
-            Expanded(
-              child: Container(
-                height: MediaQuery.of(context).size.height * 0.15,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  
-                  children: [
-                    Text(
-                      '${article["title"]}',
-                      style: Theme.of(context).textTheme.bodyText1,
-                      maxLines: 3,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    Text(
-                      'Published: ${article["publishedAt"].toString().substring(0,16).replaceAll('T', ' ')}',
-                      style: TextStyle(
-                        color: Colors.grey,
-                      ),
-                    ),
-                  ],
+Widget buildArticleItem(context, article) =>
+    BlocBuilder<ThemeCubit, ThemeState>(
+      builder: (context, state) {
+        return Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: InkWell(
+            onTap: () {
+              NavigateTo(context, WebViewScreen("${article["url"]}"));
+            },
+            child: Row(
+              children: [
+                Container(
+                  width: MediaQuery.of(context).size.width * 0.30,
+                  height: MediaQuery.of(context).size.height * 0.15,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0),
+                      image: DecorationImage(
+                        image: NetworkImage('${article["urlToImage"]}'),
+                        fit: BoxFit.cover,
+                      )),
                 ),
-              ),
+                SizedBox(
+                  width: 20,
+                ),
+                Expanded(
+                  child: Container(
+                    height: MediaQuery.of(context).size.height * 0.15,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          '${article["title"]}',
+                          style: Theme.of(context).textTheme.bodyText1,
+                          maxLines: 3,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                        Text(
+                          'Published: ${article["publishedAt"].toString().substring(0, 16).replaceAll('T', ' ')}',
+                          style: TextStyle(
+                            color: Colors.grey,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
+          ),
+        );
+      },
     );
 
-
-Widget articleBuilder(list,{isSearch=false,itemCount=10}){
+Widget articleBuilder(list, {isSearch = false, itemCount = 10}) {
   return list.isEmpty
-            ? (isSearch)?Container():Center(
-                child: CircularProgressIndicator(),
-              )
-            : ListView.separated(
-              physics: BouncingScrollPhysics(),
-                itemBuilder: (context, index) => buildArticleItem(context,list[index]),
-                separatorBuilder: (context, index) => Divider(),
-                itemCount:itemCount);
+      ? (isSearch)
+          ? Container()
+          : Center(
+              child: CircularProgressIndicator(),
+            )
+      : ListView.separated(
+          physics: BouncingScrollPhysics(),
+          itemBuilder: (context, index) =>
+              buildArticleItem(context, list[index]),
+          separatorBuilder: (context, index) => Divider(),
+          itemCount: itemCount);
 }
-
-
 
 Widget DefaultButton({
   double? height,
@@ -96,7 +101,6 @@ Widget DefaultButton({
       ),
     );
 
-
 String emailPattern =
     r"^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]"
     r"{0,253}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]"
@@ -110,11 +114,9 @@ Widget DefaultFormField({
   required TextEditingController controller,
   TextInputType kbtype = TextInputType.text,
   Color bordercolor = Colors.red,
-
-
-  TextStyle? style ,
-  Color? hintColor ,
-  Color? lableColor ,
+  TextStyle? style,
+  Color? hintColor,
+  Color? lableColor,
   String? label,
   Icon? prefixicon,
   String? hint,
@@ -145,7 +147,6 @@ Widget DefaultFormField({
         controller: controller,
         keyboardType: kbtype,
         decoration: InputDecoration(
-       
           hintStyle: TextStyle(color: hintColor),
           hintText: hint,
           labelStyle: TextStyle(color: lableColor),
@@ -153,10 +154,10 @@ Widget DefaultFormField({
           suffixIcon: suffixicon,
           labelText: label,
           border: InputBorder.none,
-        // focusedBorder: InputBorder.none,
-        // enabledBorder: InputBorder.none,
-        // errorBorder: InputBorder.none,
-        
+          // focusedBorder: InputBorder.none,
+          // enabledBorder: InputBorder.none,
+          // errorBorder: InputBorder.none,
+
           // border: OutlineInputBorder(
           //   borderRadius: BorderRadius.circular(8),
           // ),
@@ -169,9 +170,8 @@ Widget DefaultFormField({
         ),
 
         onChanged: onChanged,
-      
       ),
     );
-void NavigateTo(context,widget){
-    Navigator.push(context, MaterialPageRoute(builder: (context)=>widget));
+void NavigateTo(context, widget) {
+  Navigator.push(context, MaterialPageRoute(builder: (context) => widget));
 }
